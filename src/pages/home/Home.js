@@ -248,7 +248,7 @@ const Home = () => {
           </div>
           {selectedItems.length > 0 ? (
             <div className="item-list">
-              <h3>{selectedRow}번칸의 물건 목록:</h3>
+              <h3>{selectedRow}번칸의 물건 목록</h3>
               <ul>
                 {selectedItems.map((item, index) => (
                   <li key={index} onClick={() => handleItemClick(item)} className="clickable-item">
@@ -260,7 +260,7 @@ const Home = () => {
           ) : (
             selectedRow && (
               <div className="item-list">
-                <h3>{selectedRow}번칸의 물건 목록:</h3>
+                <h3>{selectedRow}번칸의 물건 목록</h3>
                 <p>물건이 없습니다</p>
               </div>
             )

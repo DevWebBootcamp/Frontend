@@ -30,6 +30,12 @@ html, body {
   font-family: 'Roboto', sans-serif;
 }
 
+.area_input__container:focus-within {
+  transform: rotateX(5deg) rotateY(1deg) scale(1.05);
+  box-shadow: 25px 25px 0 -5px #e9b50b, 25px 25px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
 .area_input__container {
   position: relative;
   background: #f0f0f0;
@@ -86,6 +92,7 @@ html, body {
   background: #e9b50b;
   transform: translateZ(10px) translateX(-5px) translateY(-5px);
   box-shadow: 5px 5px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
 }
 
 .area_input__button__shadow {
@@ -110,6 +117,13 @@ html, body {
   box-sizing: border-box;
   line-height: normal;
   white-space: nowrap;
+}
+
+.area_input__search:focus {
+  background: #f0f0f0;
+  transform: translateZ(20px) translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
 }
 
 .area_input__search {
@@ -200,8 +214,8 @@ html, body {
 
 /* 삭제 버튼 */
 .area_button.deleteBtn {
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
   border: none;
@@ -239,59 +253,126 @@ html, body {
 
 /* 반응형 설정 */
 @media (max-width: 768px) {
-  .layout-content {
-    padding-left: 30px;
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box; /* 패딩이 포함된 전체 크기 계산 */
   }
 
-  .area_spaces-list {
-    max-width: 85%;
-    padding: 15px;
-    margin-left: 15px;
-    box-shadow: 8px 8px 0 #000;
+  .layout-content {
+    padding-left: 20px; /* 좌측 여백 추가 */
+    padding-right: 20px; /* 우측 여백 추가 */
   }
 
   .area_input__container-wrapper {
-    margin: 20px auto;
-    max-width: 85%;
+    margin: 50px auto;
+    max-width: 85%; /* 입력 박스 너비 축소 */
+  }
+
+  .area_input__container {
+    padding: 15px;
+    gap: 10px; /* 요소 간 간격 축소 */
+    max-width: 300px; /* 입력 박스 최대 너비 축소 */
+    box-shadow: 6px 6px 0 #000; /* 그림자 크기 축소 */
+    transform: none; /* 회전 효과 제거 */
   }
 
   .area_input__button__shadow {
     padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  .area_spaces-list li {
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
-  .area_editBtn, .deleteBtn {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .layout-content {
-    padding-left: 20px;
-  }
-
-  .area_spaces-list {
-    margin-left: 10px;
-    box-shadow: 5px 5px 0 #000;
+    font-size: 12px; /* 버튼 글씨 크기 축소 */
   }
 
   .area_input__search {
     font-size: 14px;
-    padding: 10px;
+    padding: 12px; /* 내부 패딩 줄이기 */
+  }
+
+  .area_spaces-list {
+    max-width: 85%; /* 공간 목록 너비 축소 */
+    padding: 15px;
+    margin: 20px auto;
+    box-shadow: 6px 6px 0 #000; /* 그림자 크기 축소 */
   }
 
   .area_spaces-list h2 {
-    font-size: 20px;
+    font-size: 20px; /* 제목 크기 축소 */
+    margin-bottom: 10px;
   }
 
-  .area_spaces-list li {
-    font-size: 14px;
+  .area_space-item {
+    padding: 10px;
+    font-size: 16px; /* 글씨 크기 축소 */
+    gap: 8px; /* 요소 간 간격 축소 */
+    box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
+  }
+
+  .area_editBtn, .area_button.deleteBtn {
+    width: 30px;
+    height: 30px; /* 버튼 크기 축소 */
+  }
+
+  .area_error-text {
+    font-size: 14px; /* 에러 메시지 글씨 크기 축소 */
+  }
+}
+
+@media (max-width: 480px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box;
+  }
+
+  .layout-content {
+    padding-left: 10px; /* 좌측 여백 추가 */
+    padding-right: 10px; /* 우측 여백 추가 */
+  }
+
+  .area_input__container-wrapper {
+    margin: 50px auto;
+    max-width: 95%; /* 입력 박스 너비 더 축소 */
+  }
+
+  .area_input__container {
+    padding: 10px;
+    gap: 8px; /* 요소 간 간격 더 축소 */
+    max-width: 260px; /* 입력 박스 최대 너비 축소 */
+    box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
+  }
+
+  .area_input__button__shadow {
+    padding: 6px 12px;
+    font-size: 10px; /* 버튼 글씨 크기 더 축소 */
+  }
+
+  .area_input__search {
+    font-size: 12px;
+    padding: 8px; /* 내부 패딩 더 줄이기 */
+  }
+
+  .area_spaces-list {
+    max-width: 95%; /* 공간 목록 너비 더 축소 */
+    padding: 10px;
+    margin: 10px auto;
+    box-shadow: 3px 3px 0 #000; /* 그림자 크기 더 축소 */
+  }
+
+  .area_spaces-list h2 {
+    font-size: 18px; /* 제목 크기 축소 */
+    margin-bottom: 8px;
+  }
+
+  .area_space-item {
+    padding: 8px;
+    font-size: 14px; /* 글씨 크기 더 축소 */
+    gap: 6px; /* 요소 간 간격 더 축소 */
+    box-shadow: 2px 2px 0 #000; /* 그림자 크기 더 축소 */
+  }
+
+  .area_editBtn, .area_button.deleteBtn {
+    width: 24px;
+    height: 24px; /* 버튼 크기 더 축소 */
+  }
+
+  .area_error-text {
+    font-size: 12px; /* 에러 메시지 글씨 크기 더 축소 */
   }
 }

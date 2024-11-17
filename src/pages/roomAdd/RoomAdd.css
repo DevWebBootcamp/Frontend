@@ -322,7 +322,7 @@ html, body {
   }
 
   .input__container-wrapper {
-    margin: 20px auto;
+    margin: 50px auto;
     max-width: 85%; /* 여유 공간을 위해 너비를 줄임 */
   }
 

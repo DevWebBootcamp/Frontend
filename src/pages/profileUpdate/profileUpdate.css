@@ -120,7 +120,6 @@ html, body {
   margin-bottom: 10px;
 }
 
-
 .custom-file-upload {
   cursor: pointer;
   background-color: #ffffff;
@@ -302,7 +301,7 @@ html, body {
 
   .profile-frame {
     grid-template-columns: 1fr; /* 한 열로 변경 */
-    gap: 20px; /* 간격 줄임 */
+    gap: 20px; /* 요소 간 간격 축소 */
   }
 
   .profile-title {
@@ -325,12 +324,22 @@ html, body {
     padding: 20px; /* 모달 패딩 축소 */
     max-width: 90%; /* 작은 화면에서 모달 너비를 줄임 */
   }
+
+  .user-info-container {
+    gap: 10px; /* 사용자 정보 아이템 간의 간격 줄임 */
+  }
+
+  .user-info-item {
+    gap: 3px; /* 사용자 정보 아이템 세부 간격 줄임 */
+  }
 }
 
 @media screen and (max-width: 768px) {
   .profile-frame {
     grid-template-columns: 1fr; /* 한 열로 변경 */
-    gap: 20px; /* 간격 줄임 */
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
   }
 
   .profile-title {
@@ -340,5 +349,6 @@ html, body {
   .button-container {
     grid-column: 1 / 2; /* 한 열을 모두 사용 */
     justify-content: center; /* 버튼 중앙 정렬 */
+    padding: 15px;
   }
 }
