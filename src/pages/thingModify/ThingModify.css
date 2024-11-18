@@ -1,0 +1,142 @@
+.thing-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s ease-in-out;
+}
+
+/* 헤더와 콘텐츠 영역의 기본 설정 */
+.header-container {
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+}
+
+.storage-add-content {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+}
+
+/* 메인 콘텐츠 설정 */
+.storage-add-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.title {
+  float: left;
+  margin-left: 197px;
+  margin-top: 60.67px;
+  font-size: 40px;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.upload-button {
+  font-size: 20px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  padding: 7px 2.5px;
+  font-weight: 540;
+  font-style: normal;
+  cursor: pointer;
+  margin-top: 38px;
+}
+
+.file-input {
+  display: none;
+}
+
+.add-container {
+  display: flex;
+  margin-top: 200px;
+  float: left;
+  align-items: center;
+}
+
+.text-box-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+}
+
+.input-label {
+  font-size: 18px;
+  color: black;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.required {
+  color: red;
+  margin-left: 2px;
+}
+
+.text-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  width: 350px;
+  height: 23px;
+}
+
+.dropdown-container {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px; /* 드롭다운 리스트 간격 */
+}
+
+.dropdown-select {
+  width: 35%; /* 각 드롭다운 리스트의 너비 */
+  height: 40px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.save-button {
+  width: 45%;
+  height: 50px;
+  margin-top: 20px;
+  background-color: #ff088e;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* 모바일 대응 설정 */
+@media (max-width: 600px) {
+  .header-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .storage-add-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

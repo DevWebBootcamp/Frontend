@@ -1,0 +1,8 @@
+.screen {
+  width: 1920px; /* 화면 너비에 맞게 설정 */
+  min-height: 100vh; /* 화면 크기에 맞춰 최소 높이 설정 */
+  background-color: white;
+  display: flex;
+  justify-content: flex-start; /* 화면 위에서 시작 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+}

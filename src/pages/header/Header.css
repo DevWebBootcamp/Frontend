@@ -1,0 +1,49 @@
+.screen {
+  width: 100%; /* 화면 너비에 맞게 설정 */
+  /*min-height: 100vh; /* 화면 크기에 맞춰 최소 높이 설정 */
+  background-color: white;
+  display: flex;
+  justify-content: flex-start; /* 화면 위에서 시작 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+}
+
+.header {
+  display: flex; /* 로고와 input을 가로로 나란히 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  gap: 20px; /* 로고와 input 사이 간격 */
+  margin-top: 40px; /* 위에서 40px 떨어지도록 설정 */
+  margin-right: 90px;
+}
+
+.logoStyle {
+  width: 195px;
+  height: 60px;
+  margin: 0px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.searchbar {
+  border: 2px solid black;
+  border-radius: 40px;
+  width: 1230px;
+  height: 50px;
+  font-size: 30px;
+  padding-left: 40px;
+  padding-right: 70px; /* 오른쪽 여백을 더 확보해 이미지가 겹치지 않게 */
+  background: url("../image/magnifier.png") no-repeat right 20px center; /* 이미지 추가 */
+  background-size: 35px; /* 이미지 크기 조정 */
+}
+
+.searchbar:focus {
+  outline: none; /* 포커스 시 기본 outline 제거 */
+}
+
+.divide {
+  width: 82%; /* 수평선의 길이를 전체 화면 너비로 설정 */
+  border: none; /* 기본 border 제거 */
+  border-top: 1.5px solid black; /* 수평선 두께와 색상 설정 */
+  margin-top: 30px; /* 위쪽과의 간격 */
+  margin-bottom: 30px; /* 아래쪽과의 간격 */
+  margin-left: 110px;
+}

@@ -1,0 +1,16 @@
+/* 플러스 아이콘 컨테이너 */
+.plus-icon-container {
+  width: 300px; /* 컨테이너 너비 */
+  height: 279px; /* 컨테이너 높이 */
+  display: flex;
+  justify-content: center; /* 아이콘을 가로로 중앙 정렬 */
+  align-items: center; /* 아이콘을 세로로 중앙 정렬 */
+  border: 2px solid black; /* 테두리 색상 및 두께 */
+  box-sizing: border-box; /* 패딩 및 테두리 포함 크기 계산 */
+}
+
+/* 플러스 아이콘 */
+.plus-icon {
+  font-size: 175px; /* 플러스 아이콘 크기 */
+  color: black; /* 플러스 아이콘 색상 */
+}

@@ -1,0 +1,73 @@
+.thing-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s ease-in-out;
+}
+
+/* 헤더와 콘텐츠 영역의 기본 설정 */
+.header-container {
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+}
+
+.storage-add-content {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+}
+
+/* 메인 콘텐츠 설정 */
+.storage-add-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.title {
+  float: left;
+  margin-left: 197px;
+  margin-top: 60.67px;
+  font-size: 40px;
+}
+
+.button-container {
+  display: flex;
+  flex: 1;
+  margin-left: -90px;
+}
+
+.button-style {
+  font-size: 20px;
+  margin-top: -41px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  padding: 7px 2.5px;
+  font-weight: 540;
+  font-style: normal;
+}
+
+/* 모바일 대응 설정 */
+@media (max-width: 600px) {
+  .header-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .storage-add-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
