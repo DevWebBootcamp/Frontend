@@ -4,11 +4,13 @@ import kakao from "../image/kakao.png";
 import google from "../image/google.png";
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // useNavigate import
 import "./Login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleLogin = async () => {
     try {
@@ -39,6 +41,7 @@ function Login() {
         localStorage.setItem("access_token", token); // 로컬 스토리지에 토큰 저장
         localStorage.setItem("user_no", userNo); // user_no도 로컬 스토리지에 저장
         alert("로그인 성공!");
+        navigate("/main"); // 메인 페이지로 이동
       } else {
         alert("로그인 실패");
       }
