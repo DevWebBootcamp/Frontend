@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "../../layout/MainLayout";
 import "./profileUpdate.css";
+import Modal from 'react-modal';
+
+// 접근성 문제 해결을 위해 Modal.setAppElement 추가
+Modal.setAppElement('#root');
 
 const ProfileUpdate = () => {
     const [nickname, setNickname] = useState("");
@@ -22,6 +26,10 @@ const ProfileUpdate = () => {
 
     // 프로필 등록 여부 확인 상태
     const [isProfileRegistered, setIsProfileRegistered] = useState(false);
+
+    // 모달 상태
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const API_BASE_URL = "https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app";
 
@@ -87,7 +95,7 @@ const ProfileUpdate = () => {
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
         if (!nickname && !imageFile) {
-            setError("닉네임 또는 이미지를 입력해주세요.");
+            openModal("닉네임 또는 이미지를 입력해주세요.");
             return;
         }
         const accessToken = localStorage.getItem('access_token');
@@ -104,18 +112,18 @@ const ProfileUpdate = () => {
                 headers: { 'Authorization': `Bearer ${accessToken}` },
                 withCredentials: true,
             });
-            alert("프로필이 성공적으로 업데이트되었습니다!");
+            openModal("프로필이 성공적으로 업데이트되었습니다!");
             setIsProfileRegistered(true);
         } catch (error) {
             console.error("프로필 업데이트 중 오류 발생:", error);
-            setError("프로필 업데이트에 실패했습니다.");
+            openModal("프로필 업데이트에 실패했습니다.");
         }
     };
 
     const handlePasswordChange = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
-            setError("비밀번호가 일치하지 않습니다.");
+            openModal("비밀번호가 일치하지 않습니다.");
             return;
         }
         const accessToken = localStorage.getItem('access_token');
@@ -128,11 +136,21 @@ const ProfileUpdate = () => {
                     withCredentials: true,
                 }
             );
-            alert("비밀번호가 성공적으로 변경되었습니다!");
+            openModal("비밀번호가 성공적으로 변경되었습니다!");
         } catch (error) {
             console.error("비밀번호 변경 중 오류 발생:", error);
-            setError("비밀번호 변경에 실패했습니다.");
+            openModal("비밀번호 변경에 실패했습니다.");
         }
+    };
+
+    const openModal = (message) => {
+        setModalMessage(message);
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setModalMessage("");
     };
 
     return (
@@ -155,9 +173,7 @@ const ProfileUpdate = () => {
                             <label className="label">생일</label>
                             <p className="user-info-value">
                                 {birthday
-                                    ? `${new Date(birthday).getFullYear()}년 ${(
-                                          new Date(birthday).getMonth() + 1
-                                      )
+                                    ? `${new Date(birthday).getFullYear()}년 ${(new Date(birthday).getMonth() + 1)
                                           .toString()
                                           .padStart(2, "0")}월 ${new Date(birthday)
                                           .getDate()
@@ -242,6 +258,16 @@ const ProfileUpdate = () => {
                     {error && <p className="error-text">{error}</p>}
                 </div>
             </div>
+            <Modal 
+                isOpen={modalIsOpen} 
+                onRequestClose={closeModal} 
+                className="ReactModal__Content" 
+                overlayClassName="ReactModal__Overlay"
+            >
+                <h2>알림</h2>
+                <p>{modalMessage}</p>
+                <button onClick={closeModal}>확인</button>
+            </Modal>
         </Layout>
     );
 };

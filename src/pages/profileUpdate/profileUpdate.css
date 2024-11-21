@@ -230,7 +230,7 @@ html, body {
 }
 
 /* 모달 오버레이 스타일 */
-.modal-overlay {
+.ReactModal__Overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -244,7 +244,7 @@ html, body {
 }
 
 /* 모달 컨텐츠 스타일 */
-.modal {
+.ReactModal__Content {
   background-color: #ffffff;
   padding: 40px;
   border-radius: 10px;
@@ -259,38 +259,12 @@ html, body {
   justify-content: center; /* 세로 중앙 정렬 */
 }
 
-.modal h2 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: #e83e8c;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 /* 오류 메시지 텍스트 중앙 정렬 */
-.modal p {
+.ReactModal__Content p {
   text-align: center;
   font-size: 16px;
   color: #333333;
   margin-bottom: 20px;
-}
-
-.modal button {
-  padding: 10px 20px;
-  background-color: #e83e8c;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.modal button:hover {
-  background-color: #d31f5c;
 }
 
 /* 반응형 디자인 (갤럭시 스마트폰 기준) */
@@ -320,7 +294,7 @@ html, body {
     width: 100%; /* 전체 너비 사용 */
   }
 
-  .modal {
+  .ReactModal__Content {
     padding: 20px; /* 모달 패딩 축소 */
     max-width: 90%; /* 작은 화면에서 모달 너비를 줄임 */
   }

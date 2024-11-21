@@ -308,6 +308,46 @@ html, body {
   align-items: center;
 }
 
+.ReactModal__Content {
+  max-width: 500px; /* 최대 너비를 500px로 제한 */
+  width: 90%; /* 화면 크기에 따라 유동적으로 설정 (90%로 제한) */
+  margin: auto; /* 화면 중앙 정렬 */
+  padding: 20px; /* 내부 여백 */
+  border-radius: 10px; /* 모서리를 둥글게 설정 */
+  background-color: #ffffff; /* 배경 색상 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+
+.ReactModal__Content h2 {
+  font-size: 20px;
+}
+
+.ReactModal__Content input {
+  font-size: 14px;
+  padding: 8px;
+}
+
+.ReactModal__Content button {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.ReactModal__Overlay {
+  position: fixed; /* 화면 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은 배경 */
+  display: flex; /* 가운데 정렬 */
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 /* 반응형 설정 */
 @media (max-width: 768px) {
   .layout-content {
@@ -341,6 +381,25 @@ html, body {
     width: 30px;
     height: 30px;
   }
+
+  .ReactModal__Content { 
+    max-width: 85%;
+    padding: 15px;
+  }
+
+  .ReactModal__Content h2 {
+    font-size: 20px;
+  }
+
+  .ReactModal__Content input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .ReactModal__Content button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -364,5 +423,24 @@ html, body {
 
   .rooms-list li {
     font-size: 14px;
+  }
+
+  .ReactModal__Content {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .ReactModal__Content h2 {
+    font-size: 18px;
+  }
+
+  .ReactModal__Content input {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .ReactModal__Content button {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
