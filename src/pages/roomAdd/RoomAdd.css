@@ -308,50 +308,84 @@ html, body {
   align-items: center;
 }
 
-.ReactModal__Content {
-  max-width: 500px; /* 최대 너비를 500px로 제한 */
-  width: 90%; /* 화면 크기에 따라 유동적으로 설정 (90%로 제한) */
-  margin: auto; /* 화면 중앙 정렬 */
-  padding: 20px; /* 내부 여백 */
-  border-radius: 10px; /* 모서리를 둥글게 설정 */
-  background-color: #ffffff; /* 배경 색상 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+/* 모달창 버튼 그룹 스타일 */
+.ReactModal__Content .button-group {
+  display: flex;
+  justify-content: space-between; /* 버튼 간 간격을 균등 분배 */
+  margin-top: 20px; /* 버튼 상단 여백 */
 }
 
+.ReactModal__Content button {
+  flex: 1; /* 버튼의 너비를 동일하게 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  padding: 10px; /* 내부 여백 */
+  font-size: 14px; /* 글자 크기 */
+  background-color: #e9b50b; /* 버튼 기본 배경색 */
+  color: #000; /* 텍스트 색상 */
+  border: 2px solid #000; /* 테두리 설정 */
+  border-radius: 5px; /* 둥근 모서리 */
+  cursor: pointer; /* 포인터 표시 */
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+}
+
+.ReactModal__Content button:hover {
+  background-color: #d1a00d; /* 호버 시 배경색 변경 */
+}
+
+/* 모달창 기본 스타일 */
+.ReactModal__Content {
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
 
 .ReactModal__Content h2 {
   font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .ReactModal__Content input {
   font-size: 14px;
   padding: 8px;
-}
-
-.ReactModal__Content button {
-  padding: 8px 16px;
-  font-size: 14px;
+  margin-bottom: 15px;
+  width: calc(100% - 16px);
+  box-sizing: border-box;
 }
 
 .ReactModal__Overlay {
-  position: fixed; /* 화면 고정 */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은 배경 */
-  display: flex; /* 가운데 정렬 */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.ReactModal__Content button:hover {
+  background-color: #d1a00d; /* 호버 시 버튼 색상 변경 */
 }
 
 
 
 /* 반응형 설정 */
 @media (max-width: 768px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box; /* 패딩이 포함된 전체 크기 계산 */
+  }
+
   .layout-content {
-    padding-left: 30px; /* 더 많은 여유 공간을 확보하여 그림자가 가려지지 않도록 함 */
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box; /* 패딩이 포함된 전체 크기 계산 */
   }
 
   .rooms-list {
@@ -366,6 +400,14 @@ html, body {
     max-width: 85%; /* 여유 공간을 위해 너비를 줄임 */
   }
 
+  .input__container {
+    padding: 15px;
+    gap: 10px; /* 요소 간 간격 축소 */
+    max-width: 300px; /* 입력 박스 최대 너비 축소 */
+    box-shadow: 6px 6px 0 #000; /* 그림자 크기 축소 */
+    transform: none; /* 회전 효과 제거 */
+  }
+
   .input__button__shadow {
     padding: 8px 16px;
     font-size: 12px;
@@ -373,8 +415,9 @@ html, body {
 
   .rooms-list li {
     padding: 10px;
-    font-size: 16px;
-    margin-right: 10px; /* 오른쪽 여백을 추가하여 겹침 방지 */
+    font-size: 16px; /* 글씨 크기 축소 */
+    gap: 8px; /* 요소 간 간격 축소 */
+    box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
   }
 
   .editBtn, .deleteBtn {
@@ -404,25 +447,40 @@ html, body {
 
 @media (max-width: 480px) {
   .layout-content {
-    padding-left: 20px; /* 작은 화면에서 여유 공간을 추가 */
+      padding-left: 10px; /* 좌측 여백 추가 */
+    padding-right: 10px; /* 우측 여백 추가 */
   }
 
   .rooms-list {
-    margin-left: 10px; /* 사이드바와 겹치지 않도록 여백 추가 */
-    box-shadow: 5px 5px 0 #000; /* 더 작은 그림자 설정 */
+    max-width: 95%; /* 공간 목록 너비 더 축소 */
+    padding: 10px;
+    margin: 10px auto;
+    box-shadow: 3px 3px 0 #000; /* 그림자 크기 더 축소 */
   }
 
   .input__search {
     font-size: 14px;
-    padding: 10px;
+    padding: 8px;
   }
 
   .rooms-list h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .rooms-list li {
-    font-size: 14px;
+    padding: 8px;
+    font-size: 14px; /* 글씨 크기 더 축소 */
+    gap: 6px; /* 요소 간 간격 더 축소 */
+    box-shadow: 2px 2px 0 #000; /* 그림자 크기 더 축소 */
+  }
+
+  .editBtn, .button.deleteBtn {
+    width: 24px;
+    height: 24px; /* 버튼 크기 더 축소 */
+  }
+  
+  .error-text {
+    font-size: 12px; /* 에러 메시지 글씨 크기 더 축소 */
   }
 
   .ReactModal__Content {

@@ -211,9 +211,12 @@ html, body {
   gap: 10px;
 }
 
-.storage_button-group {
+.storage_buttons-container {
   display: flex;
-  gap: 5px;
+  flex-direction: row; /* 버튼을 가로로 배치 */
+  justify-content: space-between; /* 버튼 간 간격 조정 (필요시) */
+  align-items: center; /* 버튼의 세로 정렬 */
+  gap: 5px; /* 버튼 간의 간격 */
 }
 
 .ReactModal__Content {
@@ -237,10 +240,20 @@ html, body {
   padding: 8px;
 }
 
+/* 모달 버튼 스타일 */
 .ReactModal__Content button {
-  padding: 8px 16px;
-  font-size: 14px;
+  flex: 1; /* 버튼 너비를 동일하게 설정 */
+  padding: 10px; /* 버튼 내부 여백 */
+  font-size: 14px; /* 글자 크기 */
+  background-color: #e9b50b; /* 기본 배경색 */
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
 }
+
 
 .ReactModal__Overlay {
   position: fixed; /* 화면 고정 */
@@ -257,6 +270,16 @@ html, body {
 
 /* 반응형 설정 */
 @media (max-width: 768px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box; /* 패딩이 포함된 전체 크기 계산 */
+  }
+
+  .layout-content {
+    padding-left: 20px; /* 좌측 여백 추가 */
+    padding-right: 20px; /* 우측 여백 추가 */
+  }
+
   .storage_storages-list {
     max-width: 85%;
   }
@@ -264,6 +287,14 @@ html, body {
   .storage_input__container-wrapper {
     margin: 50px auto;
     max-width: 85%;
+  }
+
+  .storage_input__container {
+    padding: 15px;
+    gap: 10px; /* 요소 간 간격 축소 */
+    max-width: 300px; /* 입력 박스 최대 너비 축소 */
+    box-shadow: 6px 6px 0 #000; /* 그림자 크기 축소 */
+    transform: none; /* 회전 효과 제거 */
   }
 
   .storage_input__button__shadow {
@@ -274,6 +305,17 @@ html, body {
   .storage_storages-list li {
     padding: 10px;
     font-size: 16px;
+    gap: 8px;
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .editBtn, .button.deleteBtn {
+    width: 30px;
+    height: 30px; /* 버튼 크기 축소 */
+  }
+
+  .error-text {
+    font-size: 14px; /* 에러 메시지 글씨 크기 축소 */
   }
 
   .ReactModal__Content { 
@@ -298,20 +340,31 @@ html, body {
 
 /* 480px 이하 화면 크기에 대한 반응형 설정 */
 @media (max-width: 480px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box;
+  }
+
+  .layout-content {
+    padding-left: 10px; /* 좌측 여백 추가 */
+    padding-right: 10px; /* 우측 여백 추가 */
+  }
+
   .storage_storages-list {
     max-width: 95%;
     padding: 10px;
-    box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
+    margin: 10px auto;
+    box-shadow: 3px 3px 0 #000; /* 그림자 크기 축소 */
   }
 
   .storage_input__container-wrapper {
-    margin: 40px auto;
+    margin: 50px auto;
     max-width: 95%;
   }
 
   .storage_input__container {
     padding: 10px;
-    gap: 10px;
+    gap: 8px;
     box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
     max-width: 260px;
   }
@@ -334,7 +387,17 @@ html, body {
   .storage_storages-list li {
     padding: 8px;
     font-size: 14px;
-    box-shadow: 3px 3px 0 #000; /* 그림자 크기 축소 */
+    gap: 6px;
+    box-shadow: 2px 2px 0 #000; /* 그림자 크기 축소 */
+  }
+
+  .editBtn, .button.deleteBtn {
+    width: 24px;
+    height: 24px; /* 버튼 크기 더 축소 */
+  }
+
+  .error-text {
+    font-size: 12px; /* 에러 메시지 글씨 크기 더 축소 */
   }
 
   .ReactModal__Content {

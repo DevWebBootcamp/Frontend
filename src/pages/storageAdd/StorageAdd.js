@@ -280,18 +280,22 @@ const StorageAdd = () => {
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="ReactModal__Content" overlayClassName="ReactModal__Overlay">
                 <h2>알림</h2>
                 <p>{modalMessage}</p>
-                <button onClick={closeModal}>확인</button>
+                <div className="storage_button-group">
+                    <button onClick={closeModal}>확인</button>
+                </div>
             </Modal>
 
             <Modal isOpen={confirmModalIsOpen} onRequestClose={closeConfirmModal} className="ReactModal__Content" overlayClassName="ReactModal__Overlay">
-                <h2>확인</h2>
+                <h2>수납장 삭제 확인</h2>
                 <p>정말로 삭제하시겠습니까?</p>
-                <button onClick={handleConfirm}>예</button>
-                <button onClick={closeConfirmModal}>아니오</button>
+                <div className="storage_button-group">
+                    <button onClick={handleConfirm}>삭제</button>
+                    <button onClick={closeConfirmModal}>취소</button>
+                </div>
             </Modal>
 
             <Modal isOpen={editModalIsOpen} onRequestClose={closeEditModal} className="ReactModal__Content" overlayClassName="ReactModal__Overlay">
-                <h2>수정</h2>
+                <h2>수납장 이름/칸 수정</h2>
                 <input
                     type="text"
                     value={editStorageDetails.name}
@@ -304,9 +308,12 @@ const StorageAdd = () => {
                     onChange={(e) => setEditStorageDetails({ ...editStorageDetails, rows: Math.max(1, Math.min(10, Number(e.target.value))) })}
                     placeholder="칸 수 (1~10)"
                 />
-                <button onClick={handleConfirm}>저장</button>
-                <button onClick={closeEditModal}>취소</button>
+                <div className="storage_button-group">
+                    <button onClick={handleConfirm}>저장</button>
+                    <button onClick={closeEditModal}>취소</button>
+                </div>
             </Modal>
+
         </Layout>
     );
 };

@@ -312,18 +312,23 @@ const RoomAdd = () => {
                             onChange={(e) => setEditRoomName(e.target.value)}
                             placeholder="새로운 방 이름 입력"
                         />
-                        <button onClick={handleEditConfirm}>수정</button>
-                        <button onClick={closeModal}>취소</button>
+                        <div className="button-group">
+                            <button onClick={handleEditConfirm}>수정</button>
+                            <button onClick={closeModal}>취소</button>
+                        </div>
                     </>
                 )}
                 {modalType === "delete" && (
                     <>
                         <h2>방 삭제 확인</h2>
                         <p>정말로 이 방을 삭제하시겠습니까?</p>
-                        <button onClick={handleDeleteConfirm}>삭제</button>
-                        <button onClick={closeModal}>취소</button>
+                        <div className="button-group">
+                            <button onClick={handleDeleteConfirm}>삭제</button>
+                            <button onClick={closeModal}>취소</button>
+                        </div>
                     </>
                 )}
+
                 {modalType === "error" && (
                     <>
                         <h2>오류 발생</h2>

@@ -255,37 +255,49 @@ const AreaAdd = () => {
             </div>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={() => closeModal()}
+                onRequestClose={closeModal}
+                contentLabel="Modal"
                 className="ReactModal__Content"
                 overlayClassName="ReactModal__Overlay"
             >
                 {modalType === "edit" && (
-                    <div>
+                    <>
                         <h2>공간 이름 수정</h2>
                         <input
                             type="text"
-                            placeholder="새로운 공간 이름을 입력하세요"
                             value={editAreaName}
                             onChange={(e) => setEditAreaName(e.target.value)}
+                            placeholder="새로운 공간 이름 입력"
                         />
-                        <button onClick={handleEditConfirm}>저장</button>
-                        <button onClick={closeModal}>취소</button>
-                    </div>
+                        <div className="button-group">
+                            <button onClick={handleEditConfirm}>수정</button>
+                            <button onClick={closeModal}>취소</button>
+                        </div>
+                    </>
                 )}
                 {modalType === "delete" && (
-                    <div>
-                        <h2>공간 삭제</h2>
+                    <>
+                        <h2>공간 삭제 확인</h2>
                         <p>정말로 이 공간을 삭제하시겠습니까?</p>
-                        <button onClick={handleDeleteConfirm}>삭제</button>
-                        <button onClick={closeModal}>취소</button>
-                    </div>
+                        <div className="button-group">
+                            <button onClick={handleDeleteConfirm}>삭제</button>
+                            <button onClick={closeModal}>취소</button>
+                        </div>
+                    </>
                 )}
                 {modalType === "error" && (
-                    <div>
-                        <h2>오류</h2>
+                    <>
+                        <h2>오류 발생</h2>
+                        <p>{errorMessage}</p>
+                        <button onClick={closeModal}>닫기</button>
+                    </>
+                )}
+                {modalType === "success" && (
+                    <>
+                        <h2>성공</h2>
                         <p>{errorMessage}</p>
                         <button onClick={closeModal}>확인</button>
-                    </div>
+                    </>
                 )}
             </Modal>
         </Layout>
