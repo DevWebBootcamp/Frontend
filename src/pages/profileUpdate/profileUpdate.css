@@ -129,6 +129,7 @@ html, body {
   font-size: 14px;
   color: #333;
   text-align: center;
+  width: 100%; /* 전체 너비 사용 */
 }
 
 /* 입력 필드 컨테이너 스타일 */
@@ -191,42 +192,66 @@ html, body {
   justify-content: flex-end; /* 오른쪽 정렬 */
   gap: 20px; /* 버튼 간격 */
   margin-top: 20px; /* 위 여백 추가 */
+  width: 100%; /* 전체 너비 설정 */
+  box-sizing: border-box;
 }
 
-/* 버튼 스타일 */
+/* 버튼 스타일 (RoomAdd.css와 동일하게 변경) */
 .update-button {
-  border-radius: 5px; /* 모서리 둥글게 */
-  padding: 12px 24px; /* 내부 여백 추가 */
-  font-family: 'Roboto', sans-serif; /* 폰트 설정 */
-  font-size: 16px; /* 폰트 크기 설정 */
-  cursor: pointer; /* 커서 모양 설정 */
-  background-color: #e83e8c; /* 버튼 배경색 */
-  color: #ffffff; /* 버튼 텍스트 색 */
-  border: none; /* 테두리 제거 */
-  transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+  cursor: pointer;
+  border: 3px solid #000;
+  background: #e9b50b;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  text-transform: none;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  box-sizing: border-box;
+  line-height: normal;
+  white-space: nowrap;
 }
 
-/* 취소 버튼 스타일 */
 .cancel-button {
-  border-radius: 5px; /* 모서리 둥글게 */
-  padding: 12px 24px; /* 내부 여백 추가 */
-  font-family: 'Roboto', sans-serif; /* 폰트 설정 */
-  font-size: 16px; /* 폰트 크기 설정 */
-  cursor: pointer; /* 커서 모양 설정 */
-  background-color: #ffffff; /* 버튼 배경색 */
-  color: #e83e8c; /* 버튼 텍스트 색 */
-  border: 2px solid #e83e8c; /* 테두리 색상 */
-  transition: background-color 0.3s ease, color 0.3s ease; /* 배경색 변화 애니메이션 */
+  cursor: pointer;
+  border: 3px solid #000;
+  background: #e9b50b;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  text-transform: none;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  box-sizing: border-box;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 /* 버튼 호버 시 배경색 변경 */
 .update-button:hover {
-  background-color: #d31f5c; /* 호버 시 배경색 변경 */
+  background-color: #d1a00d; /* 호버 시 배경색 변경 */
 }
 
 .cancel-button:hover {
-  background-color: #e83e8c; /* 호버 시 배경색 변경 */
-  color: #ffffff; /* 텍스트 색상 변경 */
+  background-color: #d1a00d; /* 호버 시 배경색 변경 */
 }
 
 /* 모달 오버레이 스타일 */
@@ -270,7 +295,9 @@ html, body {
 /* 반응형 디자인 (갤럭시 스마트폰 기준) */
 @media screen and (max-width: 480px) {
   .container {
+    width: calc(100% - 30px); /* 화면 너비에서 접힌 사이드바의 너비만큼 빼서 설정 */
     padding: 15px; /* 패딩 축소 */
+    box-sizing: border-box;
   }
 
   .profile-frame {
@@ -287,11 +314,19 @@ html, body {
     grid-column: 1 / 2; /* 한 열을 모두 사용 */
     justify-content: center; /* 버튼 중앙 정렬 */
     gap: 10px; /* 버튼 간격 줄이기 */
+    width: 100%; /* 전체 너비 사용 */
   }
 
   .input-field,
+  .input-field[type="password"],
   .custom-file-upload {
-    width: 100%; /* 전체 너비 사용 */
+    width: 100%; /* 전체 너비 사용 및 입력 필드 너비 확장 */
+  }
+
+  .field-container,
+  form {
+    width: 100%; /* 부모 컨테이너의 너비 설정 */
+    box-sizing: border-box;
   }
 
   .ReactModal__Content {
