@@ -15,6 +15,7 @@
   flex: 1;
   margin-top: 60px;
   width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+  height: 100%;
 }
 
 /* 메인 콘텐츠 설정 */
@@ -193,11 +194,12 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 660px) {
   .storage-add-content {
     flex-direction: column; /* 요소를 세로로 정렬 */
     align-items: flex-start; /* 왼쪽 정렬 */
-    padding: 10px; /* 내부 여백 추가 */
+    margin-left: -10px;
+    margin-bottom: 80px;
   }
 
   .add-container {
@@ -233,7 +235,7 @@
 
   .title {
     font-size: 24px; /* 타이틀 크기 축소 */
-    margin-left: 0; /* 타이틀의 왼쪽 여백 제거 */
+    margin-left: -30px; /* 타이틀의 왼쪽 여백 제거 */
     text-align: center; /* 타이틀을 중앙 정렬 */
   }
 
@@ -251,5 +253,12 @@
 
   .text-input-date {
     margin-left: -120px;
+  }
+
+  .storage-add-content {
+    display: flex;
+    flex: 1;
+    margin-top: 60px;
+    width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
   }
 }

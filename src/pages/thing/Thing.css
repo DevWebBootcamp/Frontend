@@ -28,7 +28,7 @@
 .title {
   float: left;
   margin-left: 197px;
-  margin-top: 60.67px;
+  margin-top: 60px;
   font-size: 40px;
 }
 
@@ -193,7 +193,14 @@
   position: relative;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 660px) {
+  .storage-add-content {
+    flex-direction: column; /* 요소를 세로로 정렬 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    margin-left: -100px;
+    margin-bottom: 80px;
+  }
+
   .item-name-list {
     grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개씩 */
   }
