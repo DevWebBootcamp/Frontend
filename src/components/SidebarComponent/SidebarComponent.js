@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './SidebarComponent.css';
+import React, { useState } from "react";
+import "./SidebarComponent.css";
 
 const SidebarComponent = () => {
   // 현재 열려 있는 메뉴 항목의 인덱스를 저장하는 상태
@@ -22,7 +22,9 @@ const SidebarComponent = () => {
   };
 
   return (
-    <aside className={`side-bar ${isSidebarClicked ? 'side-bar-icon-clicked' : ''}`}>
+    <aside
+      className={`side-bar ${isSidebarClicked ? "side-bar-icon-clicked" : ""}`}
+    >
       {/* 햄버거 버튼 */}
       <section className="side-bar__icon-box" onClick={handleSidebarToggle}>
         <section className="side-bar__icon-1">
@@ -31,7 +33,7 @@ const SidebarComponent = () => {
           <div></div>
         </section>
       </section>
-      
+
       {/* 사이드바 메뉴 */}
       <ul>
         {[
@@ -39,7 +41,7 @@ const SidebarComponent = () => {
           { name: "공간", link: "/area-add" },
           { name: "방", link: "/room-add" },
           { name: "수납장", link: "/storage-add" },
-          { name: "물건", link: "#" }
+          { name: "물건", link: "/thing" },
         ].map((menu, index) => (
           <li key={index}>
             <a

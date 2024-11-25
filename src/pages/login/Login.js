@@ -1,4 +1,4 @@
-import logo from "../image/로고.png";
+import logo from "../image/logo.png";
 import naver from "../image/naver.png";
 import kakao from "../image/kakao.png";
 import google from "../image/google.png";
@@ -39,8 +39,6 @@ function Login() {
         const token = response.data.access_token; // 서버에서 반환한 토큰을 사용
         const userNo = response.data.user_no; // 서버에서 반환한 user_no
         localStorage.setItem("access_token", token); // 로컬 스토리지에 토큰 저장
-        localStorage.setItem("user_no", userNo); // user_no도 로컬 스토리지에 저장
-        alert("로그인 성공!");
         navigate("/main"); // 메인 페이지로 이동
       } else {
         alert("로그인 실패");
@@ -55,7 +53,7 @@ function Login() {
     <div className="App">
       <div className="login">
         <div className="logo">
-          <img src={logo} alt="로고" />
+          <img src={logo} alt="로고" style={{ width: "280px" }} />
           <div className="id">
             <input
               type="email"
@@ -71,14 +69,6 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <label className="stay">
-            <input
-              id="keep"
-              type="checkbox"
-              style={{ width: "15px", height: "15px" }}
-            />
-            <span style={{ color: "black" }}>로그인 유지</span>
-          </label>
           <button type="button" className="loginButton" onClick={handleLogin}>
             로그인
           </button>
@@ -93,41 +83,6 @@ function Login() {
           >
             아이디 / 비밀번호 찾기
           </a>
-        </div>
-        <hr style={{ marginTop: "50px", width: "370px" }} />
-        <div
-          style={{
-            width: "350px",
-            margin: "auto",
-            display: "flex",
-            gap: "70px",
-            paddingTop: "20px",
-          }}
-        >
-          <img
-            src={naver}
-            alt="네이버"
-            className="socialLogin"
-            onClick={() => {
-              console.log(0);
-            }}
-          />
-          <img
-            src={kakao}
-            alt="카카오"
-            className="socialLogin"
-            onClick={() => {
-              console.log(1);
-            }}
-          />
-          <img
-            src={google}
-            alt="구글"
-            className="socialLogin"
-            onClick={() => {
-              console.log(2);
-            }}
-          />
         </div>
       </div>
     </div>

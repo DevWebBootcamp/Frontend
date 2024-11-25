@@ -55,6 +55,15 @@
   display: none;
 }
 
+.uploaded-image {
+  width: 300px;
+  height: 279px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
 .add-container {
   display: flex;
   margin-top: 200px;
@@ -90,6 +99,37 @@
   height: 23px;
 }
 
+.text-input-date {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  width: 350px;
+  height: 23px;
+}
+
+.text-input-half {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  width: 165px;
+  height: 23px;
+}
+
+.text-box-row {
+  display: flex;
+  justify-content: space-between; /* 텍스트 박스를 좌우로 배치 */
+  float: left;
+  margin-top: 20px; /* 간격 조정 */
+}
+
+.text-box-half {
+  width: 48%; /* 두 텍스트 박스가 동일한 너비를 가지도록 설정 */
+}
+
 .dropdown-container {
   display: flex;
   margin-top: 10px;
@@ -97,7 +137,19 @@
 }
 
 .dropdown-select {
-  width: 35%; /* 각 드롭다운 리스트의 너비 */
+  width: 25%; /* 각 드롭다운 리스트의 너비 */
+  height: 40px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-select-type {
+  width: 100%; /* 각 드롭다운 리스트의 너비 */
   height: 40px;
   padding: 5px;
   font-size: 16px;
@@ -138,5 +190,66 @@
 
   .sidebar.open {
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 750px) {
+  .storage-add-content {
+    flex-direction: column; /* 요소를 세로로 정렬 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    padding: 10px; /* 내부 여백 추가 */
+  }
+
+  .add-container {
+    flex-direction: column; /* 수직 정렬 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    margin-top: 20px; /* 상단 여백 감소 */
+  }
+
+  .upload-container {
+    align-items: flex-start; /* 업로드 영역 왼쪽 정렬 */
+    margin-left: 0; /* 왼쪽 여백 제거 */
+    width: 100%; /* 화면에 꽉 차도록 조정 */
+  }
+
+  .text-box-container {
+    margin-left: 0; /* 텍스트 박스의 왼쪽 여백 제거 */
+    width: 100%; /* 텍스트 박스가 화면 너비를 채우도록 조정 */
+  }
+
+  .dropdown-container {
+    flex-direction: column; /* 드롭다운 리스트를 수직 정렬 */
+    gap: 5px; /* 간격 축소 */
+    width: 100%; /* 드롭다운 리스트의 너비 조정 */
+  }
+
+  .dropdown-select {
+    width: 100%; /* 드롭다운 리스트가 화면 너비에 맞게 조정 */
+  }
+
+  .save-button {
+    margin-left: 0; /* 버튼의 왼쪽 여백 제거 */
+  }
+
+  .title {
+    font-size: 24px; /* 타이틀 크기 축소 */
+    margin-left: 0; /* 타이틀의 왼쪽 여백 제거 */
+    text-align: center; /* 타이틀을 중앙 정렬 */
+  }
+
+  .dropdown-select-type {
+    width: 75%; /* 각 드롭다운 리스트의 너비 */
+    height: 40px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .text-input-date {
+    margin-left: -120px;
   }
 }

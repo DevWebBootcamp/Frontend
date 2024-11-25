@@ -28,7 +28,7 @@ function App() {
               path="/verification-failed"
               element={<VerificationFailed />}
             />
-            <Route path="/main" element={<Main />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/verify-code" element={<Verify />} />
             <Route path="/profile-update" element={<ProfileUpdate />} />
             <Route path="/storage-add" element={<StorageAdd />} />

@@ -33,24 +33,29 @@
 }
 
 .button-container {
-  display: flex;
-  flex: 1;
-  margin-left: -90px;
+  display: flex; /* 플렉스 박스 사용 */
+  justify-content: flex-end; /* 버튼을 오른쪽 정렬 */
+  align-items: center; /* 세로 방향 정렬 */
+  width: 100%; /* 부모 컨테이너의 너비를 설정 */
+  padding: 0 10px; /* 좌우 여백 설정 */
+  position: relative; /* 위치를 고정하지 않도록 설정 */
 }
 
 .button-style {
   font-size: 20px;
-  margin-top: -41px;
   color: #000000;
   background-color: #ffffff;
   border: 2px solid #000000;
-  padding: 7px 2.5px;
+  padding: 7px 10px; /* 버튼 내부 여백 */
   font-weight: 540;
   font-style: normal;
+  text-align: center; /* 텍스트 중앙 정렬 */
+  margin: 0; /* 불필요한 여백 제거 */
+  position: static; /* 고정된 위치를 해제 */
 }
 
 /* 모바일 대응 설정 */
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .header-container {
     width: 100%;
     padding: 10px;
@@ -69,5 +74,158 @@
 
   .sidebar.open {
     transform: translateX(0);
+  }
+}
+
+.item-name-list {
+  list-style: none; /* 기본 목록 스타일 제거 */
+  padding: 0;
+  margin: 0; /* 리스트 자체는 기본 정렬 */
+}
+
+.item-name {
+  display: block; /* 블록 요소로 설정 */
+  background-color: black; /* 배경색 설정 */
+  border-radius: 30px; /* 둥근 모서리 */
+  padding: 10px 15px; /* 내부 여백 */
+  margin: 10px auto; /* 요소 간 간격 및 중앙 정렬 */
+  cursor: pointer; /* 클릭 가능한 포인터 표시 */
+  transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+  width: 300px; /* 개별 아이템의 고정 너비 */
+  max-width: 90%; /* 작은 화면에서는 너비 조정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.item-name:hover {
+  background-color: #f1f1f1; /* 마우스 오버 시 배경색 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 마우스 오버 시 그림자 효과 */
+}
+
+.modal {
+  position: fixed; /* 화면에 고정 */
+  top: 50%; /* 세로 방향으로 중앙 정렬 */
+  left: 50%; /* 가로 방향으로 중앙 정렬 */
+  transform: translate(-50%, -50%); /* 완벽히 중앙으로 이동 */
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background: transparent; /* 반투명 배경 */
+  display: flex; /* 자식 요소 중앙 정렬을 위한 플렉스 박스 */
+  align-items: center; /* 세로 정렬 */
+  justify-content: center; /* 가로 정렬 */
+  z-index: 1000; /* 다른 요소보다 위에 배치 */
+}
+
+.modal-content {
+  background: white; /* 배경 흰색 */
+  padding: 20px; /* 내부 여백 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  max-width: 500px; /* 최대 너비 제한 */
+  width: 90%; /* 화면 크기에 맞게 조정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: black;
+}
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center; /* 세로 정렬 */
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  color: black;
+}
+
+.modal-item-container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* 이름과 아이콘이 한 줄에 맞게 정렬 */
+}
+
+.modal-item-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-right: 20px;
+}
+
+.modal-icons {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #555;
+}
+
+.edit-icon:hover {
+  color: #007bff; /* 연필 아이콘 호버 색상 */
+}
+
+.delete-icon:hover {
+  color: #dc3545; /* 쓰레기통 아이콘 호버 색상 */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  text-align: left; /* 이름과 내용을 왼쪽 정렬 */
+  position: relative;
+}
+
+@media (max-width: 750px) {
+  .item-name-list {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개씩 */
+  }
+
+  .button-container {
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    align-items: center; /* 수직 정렬 */
+    padding-right: 10px; /* 오른쪽 여백 */
+    width: 180%;
+  }
+
+  .button-style {
+    font-size: 20px;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    padding: 7px 10px; /* 버튼 내부 여백 */
+    font-weight: 540;
+    font-style: normal;
+    width: auto; /* 너비를 콘텐츠에 맞게 조정 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 0; /* 여백 초기화 */
+  }
+
+  .storage-add-main {
+    width: 100%;
+    margin: 0;
+  }
+
+  .thing-container {
+    left: -10px;
+    margin: 0;
   }
 }
