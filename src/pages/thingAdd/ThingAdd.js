@@ -20,14 +20,12 @@ const ThingAdd = () => {
   const [item_type, setItemType] = useState("");
   const [item_Expiration_date, setItemExpirationDate] = useState(null);
   const [file, setFile] = useState("");
-  const [fileURL, setFileURL] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [user_no, setUserNo] = useState(null);
   const [spaces, setSpaces] = useState([]); // 공간 데이터 저장
   const [rooms, setRooms] = useState([]); // 방 데이터 저장
   const [storages, setStorages] = useState([]); // 수납장 데이터 저장
-  const [storageRows, setStorageRows] = useState([]); // 수납장 칸 번호 데이터 저장
-  const [filteredRows, setFilteredRows] = useState([]); // 필터링된 칸 번호 데이터 저장
+  const [filteredRows, setFilteredRows] = useState([]); // 1부터 maxRows까지의 배열 저장
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -109,9 +107,6 @@ const ThingAdd = () => {
           }
         );
         setStorages(response.data); // 수납장 데이터 설정
-        const rows = response.data.map((storage) => storage.storage_row).flat();
-        console.log("Fetched storage_rows:", rows); // storage_row 데이터 출력
-        setStorageRows(rows);
       } catch (error) {
         console.error("Error fetching storages:", error);
         alert("수납장 데이터를 가져오는 데 실패했습니다.");
@@ -121,11 +116,18 @@ const ThingAdd = () => {
   }, [room_no]);
 
   useEffect(() => {
-    // 선택된 storage_no에 따라 storage_row 필터링
-    const rows = storages
-      .filter((storage) => storage.storage_no === Number(storage_no))
-      .flatMap((storage) => storage.storage_row || []); // storage_row 값 추출
-    setFilteredRows(rows); // 필터링된 칸 데이터 설정
+    // 선택된 storage_no에 따라 storage_row 값을 가져와 배열 생성
+    const selectedStorage = storages.find(
+      (storage) => storage.storage_no === Number(storage_no)
+    );
+
+    if (selectedStorage && selectedStorage.storage_row) {
+      const maxRows = Number(selectedStorage.storage_row);
+      const rowsArray = Array.from({ length: maxRows }, (_, i) => i + 1);
+      setFilteredRows(rowsArray); // 1부터 maxRows까지의 배열 설정
+    } else {
+      setFilteredRows([]); // 유효한 storage_row가 없을 경우 빈 배열 설정
+    }
   }, [storage_no, storages]);
 
   const handleSave = async () => {
@@ -320,7 +322,10 @@ const ThingAdd = () => {
                   id="rowDropdown"
                   className="dropdown-select"
                   value={row_num}
-                  onChange={(e) => setRowNum(e.target.value)}
+                  onChange={(e) => {
+                    setRowNum(e.target.value);
+                    console.log("선택된 칸 번호:", e.target.value);
+                  }}
                 >
                   <option value="">칸</option>
                   {filteredRows.map((row, index) => (
