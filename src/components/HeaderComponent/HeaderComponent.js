@@ -1,13 +1,59 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 훅 가져오기
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HeaderComponent.css';
 import sunabLogo from '../../pages/image/sunab.png';
 
 function HeaderComponent({ isOpen }) {
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
+  const [suggestions, setSuggestions] = useState([]); // 자동완성 결과 상태
+  const [loading, setLoading] = useState(false); // 로딩 상태
 
   const handleLogoClick = () => {
-    navigate('/home'); // 로고 클릭 시 '/home' 페이지로 이동
+    navigate('/home');
+  };
+
+  // API 요청 함수
+  const fetchSuggestions = async (itemName) => {
+    if (!itemName.trim()) {
+      setSuggestions([]); // 입력값 없을 때 빈 배열 설정
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/autocomplete?item_name=${encodeURIComponent(
+          itemName
+        )}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+          credentials: 'include',
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setSuggestions(data); // 자동완성 데이터 업데이트
+      } else {
+        setSuggestions([]); // 결과 없으면 빈 배열 설정
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setSuggestions([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    fetchSuggestions(value); // 입력값이 변경될 때마다 검색 요청
   };
 
   return (
@@ -16,15 +62,17 @@ function HeaderComponent({ isOpen }) {
         src={sunabLogo}
         alt="Logo"
         className="header-logo"
-        onClick={handleLogoClick} // 로고 클릭 핸들러 추가
-        style={{ cursor: 'pointer' }} // 클릭 가능하게 커서 스타일 변경
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
       />
-      <div className={`input-container ${isOpen ? 'sidebar-open' : ''}`}>
+      <div className="input-container">
         <input
           type="text"
           name="text"
           className="input"
           placeholder="찾는 물건 이름을 입력하세요"
+          value={searchTerm}
+          onChange={handleInputChange}
         />
         <span className="icon">
           <svg
@@ -64,7 +112,17 @@ function HeaderComponent({ isOpen }) {
             />
           </svg>
         </span>
+        {loading && <div className="loading-spinner">Loading...</div>}
       </div>
+      {suggestions.length > 0 && (
+        <ul className="autocomplete-dropdown">
+          {suggestions.map((item, index) => (
+            <li key={index} className="autocomplete-item">
+              {`${item.area_name} -> ${item.room_name} -> ${item.storage_name} -> ${item.row_num}번칸 -> ${item.item_name}`}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

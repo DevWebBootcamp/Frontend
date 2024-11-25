@@ -4,7 +4,6 @@ import SignUp from "./pages/signup/SignUp";
 import VerificationFailed from "./pages/verificationfailed/VerificationFailed";
 import Login from "./pages/login/Login";
 import Verify from "./pages/verify/VerifyCode";
-import Main from "./pages/main/Main";
 import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
 import StorageAdd from "./pages/storageAdd/StorageAdd";
 import AreaAdd from "./pages/areaAdd/AreaAdd";

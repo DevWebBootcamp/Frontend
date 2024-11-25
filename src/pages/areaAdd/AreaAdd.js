@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import Modal from 'react-modal';
 import Layout from '../../layout/MainLayout';
 import './AreaAdd.css'; // CSS 파일 import
 
 const AreaAdd = () => {
-    const [areaName, setAreaName] = useState("");
+    const [areaName, setAreaName] = useState(""); // 공간 추가 입력창 상태
+    const [editAreaName, setEditAreaName] = useState(""); // 모달 입력창 상태 (수정용)
     const [user_no, setUserNo] = useState(null);
-    const [error, setError] = useState(null);
     const [spaces, setSpaces] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentEditAreaNo, setCurrentEditAreaNo] = useState(null); // 현재 수정 중인 공간의 ID
+    const [modalType, setModalType] = useState(""); // 모달 종류 (edit, delete, error)
+    const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
 
     useEffect(() => {
         const storedUserNo = localStorage.getItem('user_no');
@@ -37,7 +42,7 @@ const AreaAdd = () => {
             setSpaces(response.data);
         } catch (error) {
             console.error("공간 조회 중 오류 발생:", error);
-            setError("공간 목록을 불러오는 데 실패했습니다. 다시 시도해주세요.");
+            showErrorModal("공간 목록을 불러오는 데 실패했습니다. 다시 시도해주세요.");
         } finally {
             setLoading(false);
         }
@@ -54,13 +59,13 @@ const AreaAdd = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         if (user_no === null) {
-            setError("유효한 사용자 번호가 없습니다.");
+            showErrorModal("유효한 사용자 번호가 없습니다.");
             return;
         }
         if (!areaName) {
-            setError("공간 이름을 입력해주세요.");
+            showErrorModal("공간 이름을 입력해주세요.");
             return;
         }
     
@@ -82,9 +87,8 @@ const AreaAdd = () => {
             console.log('응답 데이터:', response.data);
     
             if (response.status === 200) {
-                alert("공간이 성공적으로 추가되었습니다!");
+                showSuccessModal("방이 성공적으로 추가되었습니다!");
                 setAreaName("");
-                setError(null);
                 await fetchSpaces(); // 공간 추가 후 목록 갱신
             } else {
                 throw new Error('공간 추가에 실패했습니다.');
@@ -92,54 +96,88 @@ const AreaAdd = () => {
         } catch (error) {
             if (error.response && error.response.data) {
                 console.error("공간 추가 중 오류 발생:", JSON.stringify(error.response.data, null, 2));
-                setError(`공간 추가에 실패했습니다: ${error.response.data.message || "알 수 없는 오류"}`);
+                showErrorModal(`공간 추가에 실패했습니다: ${error.response.data.message || "알 수 없는 오류"}`);
             } else {
                 console.error("공간 추가 중 오류 발생:", error.message);
-                setError("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+                showErrorModal("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
             }
         }
     };
 
-    const handleEditSpace = async (area_no) => {
-        const updatedName = prompt("새로운 공간 이름을 입력하세요:");
-        if (updatedName) {
+    const handleEditSpace = (area_no, area_name) => {
+        setCurrentEditAreaNo(area_no);
+        setEditAreaName(area_name); // 수정할 공간의 이름을 상태에 설정
+        setModalType("edit");
+        setModalIsOpen(true);
+    };
+
+    const handleEditConfirm = async () => {
+        if (editAreaName && currentEditAreaNo !== null) {
             try {
                 const accessToken = localStorage.getItem('access_token');
                 await axios.put(
-                    `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/${user_no}/spaces/${area_no}`,
-                    { area_name: updatedName },
+                    `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/${user_no}/spaces/${currentEditAreaNo}`,
+                    { area_name: editAreaName },
                     {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
                         }
                     }
                 );
-                setSpaces(spaces.map(space => space.area_no === area_no ? { ...space, area_name: updatedName } : space));
+                setSpaces(spaces.map(space => space.area_no === currentEditAreaNo ? { ...space, area_name: editAreaName } : space));
+                closeModal();
             } catch (error) {
                 console.error("공간 수정 중 오류 발생:", error);
-                setError("공간 수정에 실패했습니다. 다시 시도해주세요.");
+                showErrorModal("공간 수정에 실패했습니다. 다시 시도해주세요.");
             }
         }
     };
 
-    const handleDeleteSpace = async (area_no) => {
-        if (window.confirm("정말로 이 공간을 삭제하시겠습니까?")) {
+    const handleDeleteSpace = (area_no) => {
+        setCurrentEditAreaNo(area_no);
+        setModalType("delete");
+        setModalIsOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (currentEditAreaNo !== null) {
             try {
                 const accessToken = localStorage.getItem('access_token');
                 await axios.delete(
-                    `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/${user_no}/spaces/${area_no}`,
+                    `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/${user_no}/spaces/${currentEditAreaNo}`,
                     {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
                         }
                     }
                 );
-                setSpaces(spaces.filter(space => space.area_no !== area_no));
+                setSpaces(spaces.filter(space => space.area_no !== currentEditAreaNo));
+                closeModal();
             } catch (error) {
                 console.error("공간 삭제 중 오류 발생:", error);
-                setError("공간 삭제에 실패했습니다. 다시 시도해주세요.");
+                showErrorModal("공간 삭제에 실패했습니다. 다시 시도해주세요.");
             }
         }
+    };
+
+    const showErrorModal = (message) => {
+        setErrorMessage(message);
+        setModalType("error");
+        setModalIsOpen(true);
+    };
+
+    const showSuccessModal = (message) => {
+        setErrorMessage(message);
+        setModalType("success");
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setEditAreaName(""); // 모달 닫을 때 상태 초기화
+        setCurrentEditAreaNo(null); // 현재 수정 중인 공간 ID 초기화
+        setModalType(""); // 모달 종류 초기화
+        setErrorMessage(""); // 오류 메시지 초기화
     };
 
     return (
@@ -161,7 +199,6 @@ const AreaAdd = () => {
                         저장
                     </button>
                 </div>
-                {error && <p className="area_error-text">{error}</p>}
             </div>
             <div className="area_spaces-list">
                 <h2>공간 목록</h2>
@@ -173,10 +210,10 @@ const AreaAdd = () => {
                             <li key={space.area_no ? space.area_no : index} className="area_space-item">
                                 <span className="area_space-name">{space.area_name}</span>
                                 <div className="area_buttons-container">
-                                    <button className="area_editBtn" onClick={() => handleEditSpace(space.area_no)}>
+                                    <button className="area_editBtn" onClick={() => handleEditSpace(space.area_no, space.area_name)}>
                                         <svg height="1em" viewBox="0 0 512 512">
                                             <path
-                                              d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+                                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
                                             ></path>
                                         </svg>
                                     </button>
@@ -216,6 +253,41 @@ const AreaAdd = () => {
                     <p>등록된 공간이 없습니다.</p>
                 )}
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => closeModal()}
+                className="ReactModal__Content"
+                overlayClassName="ReactModal__Overlay"
+            >
+                {modalType === "edit" && (
+                    <div>
+                        <h2>공간 이름 수정</h2>
+                        <input
+                            type="text"
+                            placeholder="새로운 공간 이름을 입력하세요"
+                            value={editAreaName}
+                            onChange={(e) => setEditAreaName(e.target.value)}
+                        />
+                        <button onClick={handleEditConfirm}>저장</button>
+                        <button onClick={closeModal}>취소</button>
+                    </div>
+                )}
+                {modalType === "delete" && (
+                    <div>
+                        <h2>공간 삭제</h2>
+                        <p>정말로 이 공간을 삭제하시겠습니까?</p>
+                        <button onClick={handleDeleteConfirm}>삭제</button>
+                        <button onClick={closeModal}>취소</button>
+                    </div>
+                )}
+                {modalType === "error" && (
+                    <div>
+                        <h2>오류</h2>
+                        <p>{errorMessage}</p>
+                        <button onClick={closeModal}>확인</button>
+                    </div>
+                )}
+            </Modal>
         </Layout>
     );
 };

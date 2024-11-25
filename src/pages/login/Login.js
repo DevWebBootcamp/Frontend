@@ -39,7 +39,7 @@ function Login() {
         const token = response.data.access_token; // 서버에서 반환한 토큰을 사용
         const userNo = response.data.user_no; // 서버에서 반환한 user_no
         localStorage.setItem("access_token", token); // 로컬 스토리지에 토큰 저장
-        navigate("/main"); // 메인 페이지로 이동
+        navigate("/home"); // 메인 페이지로 이동
       } else {
         alert("로그인 실패");
       }
