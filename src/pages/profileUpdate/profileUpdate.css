@@ -1,0 +1,363 @@
+/* 구글 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* HTML, Body 기본 스타일 설정 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* 흰색 배경 설정 */
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  width: 100%; /* 회색 여백 제거를 위해 전체 너비 사용 */
+  overflow-x: hidden; /* 수평 스크롤 제거 */
+  display: flex; /* 중앙 정렬을 위해 flex 사용 */
+  justify-content: center; /* 가로 방향 중앙 정렬 */
+  align-items: flex-start; /* 세로 방향 상단 정렬 */
+}
+
+/* 상단 헤더 스타일 */
+.header {
+  width: 100%;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #e83e8c;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 10px;
+  border: 2px solid #dcdcdc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-button {
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #e83e8c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #d31f5c;
+}
+
+.divider {
+  width: 100%;
+  border: none;
+  height: 2px;
+  background-color: #e0e0e0;
+  margin-top: 20px;
+}
+
+/* 전체 컨테이너 스타일 */
+.container {
+  background-color: #ffffff; /* 흰 배경 설정 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: center; /* 가로 방향 중앙 정렬 */
+  align-items: flex-start; /* 세로 방향 상단 정렬 */
+  padding: 20px; /* 내부 여백 줄이기 */
+  width: 100vw; /* 전체 뷰포트 너비 사용 */
+  min-height: 100vh; /* 화면 전체 높이 설정 */
+  box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 크기 설정 */
+  overflow-x: hidden; /* 수평 스크롤 제거 */
+}
+
+/* 메인 프레임 스타일 */
+.profile-frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 두 개의 열로 나눔 */
+  gap: 40px;
+  align-items: start; /* 각 아이템을 상단 정렬 */
+  width: 100%;
+  max-width: 800px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 설정 */
+}
+
+/* 프로필 제목 스타일 */
+.profile-title {
+  grid-column: 1 / 3; /* 제목은 두 열 모두 차지 */
+  font-family: 'Roboto', sans-serif; /* 폰트 설정 */
+  font-weight: 700; /* 폰트 두께 설정 */
+  font-size: 36px; /* 폰트 크기 설정 */
+  color: #333333; /* 텍스트 색상 */
+  margin-bottom: 30px; /* 아래 여백 추가 */
+  text-align: left; /* 중앙 정렬 */
+}
+
+/* 프로필 이미지 스타일 */
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-image {
+  width: 100px; /* 가로와 세로 동일하게 설정 */
+  height: 100px;
+  border-radius: 50%; /* 원형 모양으로 설정 */
+  object-fit: cover; /* 이미지가 원형 영역을 채우도록 설정 */
+  margin-bottom: 10px;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  width: 100%; /* 전체 너비 사용 */
+}
+
+/* 입력 필드 컨테이너 스타일 */
+.field-container {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향으로 배치 */
+  width: 100%; /* 전체 너비 설정 */
+  margin-bottom: 25px; /* 아래 여백 추가 */
+}
+
+/* 레이블 텍스트 스타일 */
+.label {
+  font-family: 'Roboto', sans-serif; /* 폰트 설정 */
+  font-weight: 700; /* 폰트 두께 설정 */
+  font-size: 18px; /* 폰트 크기 설정 */
+  color: #444444; /* 텍스트 색상 */
+  margin-bottom: 10px; /* 아래 여백 추가 */
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+/* 기본 입력 필드 스타일 */
+.input-field {
+  border: 2px solid #dcdcdc; /* 테두리 색상 및 두께 */
+  background-color: #ffffff; /* 배경 색상 */
+  padding: 15px; /* 내부 여백 추가 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  font-family: 'Roboto', sans-serif; /* 폰트 설정 */
+  font-size: 16px; /* 폰트 크기 설정 */
+  color: #333333; /* 텍스트 색상 */
+  box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 크기 설정 */
+  width: 100%; /* 전체 너비 설정 */
+}
+
+/* 사용자 정보 텍스트 스타일 */
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 각 사용자 정보 아이템 간의 간격 추가 */
+  margin-bottom: 30px; /* 아래 여백 추가 */
+}
+
+.user-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-info-value {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px; /* 기존 크기 유지 */
+  color: #333333;
+  text-align: left;
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+  grid-column: 2 / 3; /* 두 열 중 오른쪽에 위치 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  gap: 20px; /* 버튼 간격 */
+  margin-top: 20px; /* 위 여백 추가 */
+  width: 100%; /* 전체 너비 설정 */
+  box-sizing: border-box;
+}
+
+/* 버튼 스타일 (RoomAdd.css와 동일하게 변경) */
+.update-button {
+  cursor: pointer;
+  border: 3px solid #000;
+  background: #e9b50b;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  text-transform: none;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  box-sizing: border-box;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.cancel-button {
+  cursor: pointer;
+  border: 3px solid #000;
+  background: #e9b50b;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  text-transform: none;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  box-sizing: border-box;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* 버튼 호버 시 배경색 변경 */
+.update-button:hover {
+  background-color: #d1a00d; /* 호버 시 배경색 변경 */
+}
+
+.cancel-button:hover {
+  background-color: #d1a00d; /* 호버 시 배경색 변경 */
+}
+
+/* 모달 오버레이 스타일 */
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* 오버레이가 다른 요소 위에 보이도록 */
+}
+
+/* 모달 컨텐츠 스타일 */
+.ReactModal__Content {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  position: relative;
+  z-index: 1001; /* 오버레이보다 위에 보이도록 */
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+}
+
+/* 오류 메시지 텍스트 중앙 정렬 */
+.ReactModal__Content p {
+  text-align: center;
+  font-size: 16px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+/* 반응형 디자인 (갤럭시 스마트폰 기준) */
+@media screen and (max-width: 480px) {
+  .container {
+    width: calc(100% - 30px); /* 화면 너비에서 접힌 사이드바의 너비만큼 빼서 설정 */
+    padding: 15px; /* 패딩 축소 */
+    box-sizing: border-box;
+  }
+
+  .profile-frame {
+    grid-template-columns: 1fr; /* 한 열로 변경 */
+    gap: 20px; /* 요소 간 간격 축소 */
+  }
+
+  .profile-title {
+    text-align: center; /* 제목 중앙 정렬 */
+    font-size: 28px; /* 제목 폰트 크기 축소 */
+  }
+
+  .button-container {
+    grid-column: 1 / 2; /* 한 열을 모두 사용 */
+    justify-content: center; /* 버튼 중앙 정렬 */
+    gap: 10px; /* 버튼 간격 줄이기 */
+    width: 100%; /* 전체 너비 사용 */
+  }
+
+  .input-field,
+  .input-field[type="password"],
+  .custom-file-upload {
+    width: 100%; /* 전체 너비 사용 및 입력 필드 너비 확장 */
+  }
+
+  .field-container,
+  form {
+    width: 100%; /* 부모 컨테이너의 너비 설정 */
+    box-sizing: border-box;
+  }
+
+  .ReactModal__Content {
+    padding: 20px; /* 모달 패딩 축소 */
+    max-width: 90%; /* 작은 화면에서 모달 너비를 줄임 */
+  }
+
+  .user-info-container {
+    gap: 10px; /* 사용자 정보 아이템 간의 간격 줄임 */
+  }
+
+  .user-info-item {
+    gap: 3px; /* 사용자 정보 아이템 세부 간격 줄임 */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-frame {
+    grid-template-columns: 1fr; /* 한 열로 변경 */
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-title {
+    text-align: center; /* 제목 중앙 정렬 */
+  }
+
+  .button-container {
+    grid-column: 1 / 2; /* 한 열을 모두 사용 */
+    justify-content: center; /* 버튼 중앙 정렬 */
+    padding: 15px;
+  }
+}

@@ -1,0 +1,421 @@
+/* 구글 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+/* 기본 설정 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #ffffff; /* 기본 배경색을 흰색으로 설정 */
+  font-family: 'Roboto', sans-serif; /* 전체 글씨에 Roboto 폰트 적용 */
+}
+
+/* 전체 페이지 레이아웃 컨테이너 설정 */
+.layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffffff; /* 전체 레이아웃 배경색을 흰색으로 설정 */
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+/* 헤더와 콘텐츠 영역의 기본 설정 */
+.header-container {
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+/* 레이아웃 콘텐츠 설정 */
+.layout-content {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+/* 메인 콘텐츠 설정 */
+.layout-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff; /* 메인 콘텐츠 배경을 흰색으로 설정 */
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+/* From Uiverse.io by 0xnihilism */
+.storage_input__container-wrapper {
+  margin: 50px auto; /* 위아래 여백 설정 및 수평 중앙 정렬 */
+  display: flex;
+  justify-content: center; /* 내부 요소 수평 중앙 정렬 */
+  align-items: center; /* 내부 요소 수직 중앙 정렬 */
+  width: 100%; /* 화면 전체 너비를 차지하도록 설정 */
+  max-width: 600px; /* 최대 너비를 지정하여 중앙 정렬 효과 */
+  font-family: 'Roboto', sans-serif;
+}
+
+.storage_input__container:focus-within {
+  transform: rotateX(5deg) rotateY(1deg) scale(1.05);
+  box-shadow: 25px 25px 0 -5px #e9b50b, 25px 25px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_input__container {
+  position: relative;
+  background: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* 입력창들이 세로로 나열되도록 설정 */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  border: 4px solid #000;
+  max-width: 350px;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  transform: rotateX(10deg) rotateY(-10deg);
+  perspective: 1000px;
+  box-shadow: 10px 10px 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_input__container::before {
+  content: "수납장 추가";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #e9b50b;
+  color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 14px;
+  transform: translateZ(50px);
+  z-index: 4;
+  border: 2px solid #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_shadow__input::before {
+  content: "수납장 추가";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  transform: translateZ(-50px);
+  filter: blur(20px);
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_input__button__shadow:focus {
+  background: #e9b50b;
+  transform: translateZ(10px) translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_input__button__shadow {
+  cursor: pointer;
+  border: 3px solid #000;
+  background: #e9b50b;
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 3;
+  font-weight: bold;
+  text-transform: none;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  box-sizing: border-box;
+  line-height: normal;
+  font-family: 'Roboto', sans-serif;
+  white-space: nowrap;
+}
+
+.storage_input__search:focus {
+  background: #f0f0f0;
+  transform: translateZ(20px) translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 0 #000;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+.storage_input__search {
+  width: calc(100% - 37px); /* 튀어나가지 않도록 너비를 조정 */
+  outline: none;
+  border: 3px solid #000;
+  padding: 15px;
+  font-size: 18px;
+  background: #fff;
+  color: #000;
+  transform: translateZ(10px);
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  z-index: 3;
+  font-family: 'Roboto', Arial, sans-serif; /* Roboto 폰트 적용 */
+  letter-spacing: -0.5px;
+}
+
+.storage_input__search::placeholder {
+  color: #666;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+}
+
+/* 수납장 목록 스타일 설정 */
+.storage_storages-list {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 0 #000;
+}
+
+.storage_storages-list h2 {
+  font-size: 24px;
+  color: #000;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 15px;
+}
+
+.storage_storages-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.storage_storages-list li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 #000;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.storage_buttons-container {
+  display: flex;
+  flex-direction: row; /* 버튼을 가로로 배치 */
+  justify-content: space-between; /* 버튼 간 간격 조정 (필요시) */
+  align-items: center; /* 버튼의 세로 정렬 */
+  gap: 5px; /* 버튼 간의 간격 */
+}
+
+.ReactModal__Content {
+  max-width: 500px; /* 최대 너비를 500px로 제한 */
+  width: 90%; /* 화면 크기에 따라 유동적으로 설정 (90%로 제한) */
+  margin: auto; /* 화면 중앙 정렬 */
+  padding: 20px; /* 내부 여백 */
+  border-radius: 10px; /* 모서리를 둥글게 설정 */
+  background-color: #ffffff; /* 배경 색상 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+
+.ReactModal__Content h2 {
+  font-size: 20px;
+}
+
+.ReactModal__Content input {
+  font-size: 14px;
+  padding: 8px;
+}
+
+/* 모달 버튼 스타일 */
+.ReactModal__Content button {
+  flex: 1; /* 버튼 너비를 동일하게 설정 */
+  padding: 10px; /* 버튼 내부 여백 */
+  font-size: 14px; /* 글자 크기 */
+  background-color: #e9b50b; /* 기본 배경색 */
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+
+.ReactModal__Overlay {
+  position: fixed; /* 화면 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은 배경 */
+  display: flex; /* 가운데 정렬 */
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box; /* 패딩이 포함된 전체 크기 계산 */
+  }
+
+  .layout-content {
+    padding-left: 20px; /* 좌측 여백 추가 */
+    padding-right: 20px; /* 우측 여백 추가 */
+  }
+
+  .storage_storages-list {
+    max-width: 85%;
+  }
+
+  .storage_input__container-wrapper {
+    margin: 50px auto;
+    max-width: 85%;
+  }
+
+  .storage_input__container {
+    padding: 15px;
+    gap: 10px; /* 요소 간 간격 축소 */
+    max-width: 300px; /* 입력 박스 최대 너비 축소 */
+    box-shadow: 6px 6px 0 #000; /* 그림자 크기 축소 */
+    transform: none; /* 회전 효과 제거 */
+  }
+
+  .storage_input__button__shadow {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .storage_storages-list li {
+    padding: 10px;
+    font-size: 16px;
+    gap: 8px;
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .editBtn, .button.deleteBtn {
+    width: 30px;
+    height: 30px; /* 버튼 크기 축소 */
+  }
+
+  .error-text {
+    font-size: 14px; /* 에러 메시지 글씨 크기 축소 */
+  }
+
+  .ReactModal__Content { 
+    max-width: 85%;
+    padding: 15px;
+  }
+
+  .ReactModal__Content h2 {
+    font-size: 20px;
+  }
+
+  .ReactModal__Content input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .ReactModal__Content button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* 480px 이하 화면 크기에 대한 반응형 설정 */
+@media (max-width: 480px) {
+  .layout-container {
+    padding-right: 50px; /* 사이드바를 고려하여 우측 여백 추가 */
+    box-sizing: border-box;
+  }
+
+  .layout-content {
+    padding-left: 10px; /* 좌측 여백 추가 */
+    padding-right: 10px; /* 우측 여백 추가 */
+  }
+
+  .storage_storages-list {
+    max-width: 95%;
+    padding: 10px;
+    margin: 10px auto;
+    box-shadow: 3px 3px 0 #000; /* 그림자 크기 축소 */
+  }
+
+  .storage_input__container-wrapper {
+    margin: 50px auto;
+    max-width: 95%;
+  }
+
+  .storage_input__container {
+    padding: 10px;
+    gap: 8px;
+    box-shadow: 4px 4px 0 #000; /* 그림자 크기 축소 */
+    max-width: 260px;
+  }
+
+  .storage_input__button__shadow {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+
+  .storage_input__search {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .storage_storages-list h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .storage_storages-list li {
+    padding: 8px;
+    font-size: 14px;
+    gap: 6px;
+    box-shadow: 2px 2px 0 #000; /* 그림자 크기 축소 */
+  }
+
+  .editBtn, .button.deleteBtn {
+    width: 24px;
+    height: 24px; /* 버튼 크기 더 축소 */
+  }
+
+  .error-text {
+    font-size: 12px; /* 에러 메시지 글씨 크기 더 축소 */
+  }
+
+  .ReactModal__Content {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .ReactModal__Content h2 {
+    font-size: 18px;
+  }
+
+  .ReactModal__Content input {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .ReactModal__Content button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

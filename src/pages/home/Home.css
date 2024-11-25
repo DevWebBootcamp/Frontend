@@ -1,0 +1,265 @@
+/* 전체 페이지 컨테이너 */
+.home-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* 헤더와 콘텐츠 영역의 기본 설정 */
+.header-container {
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+}
+
+.home-content {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  width: 100%; /* 항상 전체 너비를 차지하도록 설정 */
+  position: relative;
+}
+
+/* 드롭다운 버튼들 설정 */
+.dropdown-buttons {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  z-index: 100; /* 드롭다운 버튼이 항상 위에 표시되도록 설정 */
+}
+
+/* 각 드롭다운 컨테이너 설정 */
+.dropdown {
+  position: relative; /* 드롭다운 버튼이 기준이 되도록 설정 */
+}
+
+/* 드롭다운 버튼 스타일 */
+.dropdown-button {
+  padding: 5px 10px;
+  border: 2px solid #000;
+  background-color: #ffffff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 5px 5px 0 #000;
+  font-size: 12px;
+  min-width: 100px; /* 최소 너비 설정으로 크기가 줄어들지 않도록 함 */
+}
+
+.dropdown-button:hover {
+  background-color: #e1e1e1;
+  transform: translate(-2px, -2px);
+}
+
+/* 드롭다운 리스트 설정 */
+.dropdown-list {
+  position: absolute;
+  top: 100%; /* 버튼 바로 아래에 위치하도록 설정 */
+  left: 0;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 5px 0; /* 위아래 패딩 추가로 시각적으로 정리됨 */
+  list-style: none;
+  margin: 0; /* 추가 여백 제거 */
+  z-index: 1000;
+  width: 100%; /* 드롭다운 버튼과 동일한 너비로 설정 */
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 5px;
+  color: #000;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #e1e1e1;
+}
+
+/* 메인 콘텐츠 설정 */
+.home-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 50px 20px 20px; /* 기존보다 상단 패딩을 줄여주세요 */
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+/* 서랍 UI Wrapper 설정 */
+.drawer-ui-wrapper {
+  transform: skewY(0);
+  margin-top: 100px; /* 서랍 UI의 위쪽에 마진 추가 */
+  margin-bottom: 50px; /* 물건 목록과의 간격을 추가 */
+}
+
+/* 서랍 UI CSS - 드롭다운 버튼과 겹치지 않도록 별도 스타일 지정 */
+.drawer-ui-wrapper .drawer-button {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  padding: 10px;
+  border: 2px solid #000; /* 버튼의 경계선을 검정색으로 설정 */
+  background: #c2c5f3; /* 기본 색상 통일 */
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* 서랍 Wrapper 설정 */
+.drawer-ui-wrapper .drawer-wrapper {
+  position: relative;
+  transform: skewY(-14deg);
+}
+
+.drawer-ui-wrapper .drawer-wrapper li, .drawer-ui-wrapper .drawer-button {
+  position: relative;
+  list-style: none;
+  width: 200px;
+  z-index: var(--i);
+  transition: 0.3s;
+}
+
+/* 모든 버튼의 가상 요소 색상을 Option 2처럼 통일 (#c2c5f3) */
+.drawer-ui-wrapper .drawer-wrapper .drawer-button::before,
+.drawer-ui-wrapper .drawer-wrapper .drawer-button::after {
+  position: absolute;
+  content: '';
+  background: #c2c5f3;
+  border: 2px solid #000; /* 가상 요소의 경계선을 검정색으로 설정 */
+  transition: 0.3s;
+}
+
+/* ::before 요소의 위치와 크기 설정 */
+.drawer-ui-wrapper .drawer-wrapper .drawer-button::before {
+  top: 0;
+  left: -44px;
+  width: 38px;
+  height: 30px;
+  transform-origin: right;
+  transform: skewY(45deg);
+}
+
+/* ::after 요소의 위치와 크기 설정 */
+.drawer-ui-wrapper .drawer-wrapper .drawer-button::after {
+  top: -42px;
+  left: 0;
+  width: 195px;
+  height: 40px;
+  transform-origin: bottom;
+  transform: skewX(45deg);
+}
+
+/* 버튼 hover 시 이동 효과 */
+.drawer-ui-wrapper .drawer-wrapper .drawer-button:hover,
+.drawer-ui-wrapper .drawer-wrapper .drawer-button.active {
+  transform: translateX(-20px);
+}
+
+/* 버튼 및 가상 요소 hover 시 색상 변화 */
+.drawer-ui-wrapper .drawer-button:hover,
+.drawer-ui-wrapper .drawer-button:hover::before,
+.drawer-ui-wrapper .drawer-button:hover::after,
+.drawer-ui-wrapper .drawer-button.active,
+.drawer-ui-wrapper .drawer-button.active::before,
+.drawer-ui-wrapper .drawer-button.active::after {
+  background: #575cb5;
+}
+
+/* 버튼 active 상태 */
+.drawer-ui-wrapper .drawer-button:active {
+  transform: translateX(0px);
+}
+
+/* 물건 목록 리스트 스타일 */
+.item-list {
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  border: 4px solid #000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 0 #000;
+  align-self: center; /* 중앙 정렬 유지 */
+}
+
+.item-list h3 {
+  font-size: 24px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.item-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 #000;
+  font-size: 18px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center; /* 텍스트 가로 중앙 정렬 */
+}
+
+/* 모바일 대응 설정 */
+@media (max-width: 600px) {
+  .dropdown-buttons {
+    top: 20px;
+    left: 10px;
+  }
+
+  .dropdown-button {
+    padding: 4px 8px;
+    font-size: 10px;
+    min-width: 100px; /* 모바일에서도 최소 너비 유지 */
+  }
+
+  .item-list {
+    max-width: 85%;
+    padding: 15px;
+    box-shadow: 8px 8px 0 #000;
+    margin-top: 30px;
+    margin-right: 40px;
+  }
+
+  .item-list li {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .item-list h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .item-list {
+    box-shadow: 5px 5px 0 #000;
+    margin-right: 40px;
+  }
+
+  .item-list li {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .item-list h3 {
+    font-size: 18px;
+  }
+}

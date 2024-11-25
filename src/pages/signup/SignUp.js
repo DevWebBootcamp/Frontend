@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
+import Modal from 'react-modal';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,9 @@ function SignUp() {
     gender: '남성',
     birthday: { year: '', month: '', day: '' }
   });
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -93,12 +97,22 @@ function SignUp() {
         const token = response.data.access_token;
         localStorage.setItem("user_no", userNo); // 로컬 스토리지에 저장
         localStorage.setItem("access_token", token);
-        alert('회원가입 성공! 이메일을 확인하여 인증 코드를 입력하세요.');
+        openModal('회원가입 성공! 이메일을 확인하여 인증 코드를 입력하세요.');
         navigate('/verify-code');
       }
     } catch (error) {
-      alert('회원가입 실패: ' + (error.response ? error.response.data.detail : error.message));
+      openModal('회원가입 실패: ' + (error.response ? error.response.data.detail : error.message));
     }
+  };
+
+  const openModal = (message) => {
+    setModalMessage(message);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setModalMessage('');
   };
 
   return (
@@ -233,6 +247,11 @@ function SignUp() {
           </div>
         </form>
       </div>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="ReactModal__Content" overlayClassName="ReactModal__Overlay">
+        <h2>알림</h2>
+        <p>{modalMessage}</p>
+        <button onClick={closeModal}>확인</button>
+      </Modal>
     </div>
   );
 }
