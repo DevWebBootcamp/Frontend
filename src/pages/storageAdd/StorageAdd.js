@@ -8,7 +8,10 @@ const StorageAdd = () => {
     const [storageName, setStorageName] = useState("");
     const [storageRows, setStorageRows] = useState("");
     const [user_no, setUserNo] = useState(null);
+    const [area_no, setAreaNo] = useState(null);
     const [room_no, setRoomNo] = useState(null);
+    const [areas, setAreas] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const [storages, setStorages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
@@ -20,14 +23,61 @@ const StorageAdd = () => {
 
     useEffect(() => {
         const storedUserNo = localStorage.getItem('user_no');
+        const storedAreaNo = localStorage.getItem('selected_area_no');
         const storedRoomNo = localStorage.getItem('selected_room_no');
         if (storedUserNo) {
             setUserNo(Number(storedUserNo)); // 문자열을 숫자로 변환
         }
+        if (storedAreaNo) {
+            setAreaNo(Number(storedAreaNo)); // 문자열을 숫자로 변환
+        }
         if (storedRoomNo) {
             setRoomNo(Number(storedRoomNo)); // 문자열을 숫자로 변환
         }
+
+        // 공간 목록 가져오기
+        const fetchAreas = async () => {
+            if (!storedUserNo) return;
+            try {
+                const accessToken = localStorage.getItem('access_token');
+                const response = await axios.get(
+                    `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/${storedUserNo}/spaces`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    }
+                );
+                setAreas(response.data);
+            } catch (error) {
+                console.error("공간 목록 조회 실패:", error);
+            }
+        };
+        fetchAreas();
     }, []);
+
+    useEffect(() => {
+        if (area_no) {
+            // 방 목록 가져오기
+            const fetchRooms = async () => {
+                try {
+                    const accessToken = localStorage.getItem('access_token');
+                    const response = await axios.get(
+                        `https://port-0-teamproject-2024-2-am952nlt496sho.sel5.cloudtype.app/storages/room/${area_no}/rooms`,
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${accessToken}`
+                            }
+                        }
+                    );
+                    setRooms(response.data);
+                } catch (error) {
+                    console.error("방 목록 조회 실패:", error);
+                }
+            };
+            fetchRooms();
+        }
+    }, [area_no]);
 
     const fetchStorages = useCallback(async () => {
         if (user_no === null || room_no === null) {
@@ -61,6 +111,24 @@ const StorageAdd = () => {
             fetchStorages();
         }
     }, [user_no, room_no, fetchStorages]);
+
+    const handleAreaSelect = (e) => {
+        const selectedAreaNo = e.target.value;
+        if (selectedAreaNo) {
+            setAreaNo(Number(selectedAreaNo));
+            localStorage.setItem('selected_area_no', selectedAreaNo);
+            setRoomNo(null); // 방 선택 초기화
+            setRooms([]); // 이전 방 목록 초기화
+        }
+    };
+
+    const handleRoomSelect = (e) => {
+        const selectedRoomNo = e.target.value;
+        if (selectedRoomNo) {
+            setRoomNo(Number(selectedRoomNo));
+            localStorage.setItem('selected_room_no', selectedRoomNo);
+        }
+    };
 
     const handleStorageNameChange = (e) => {
         setStorageName(e.target.value);
@@ -111,10 +179,8 @@ const StorageAdd = () => {
             }
         } catch (error) {
             if (error.response && error.response.data) {
-                console.error("수납장 추가 중 오류 발생:", JSON.stringify(error.response.data, null, 2));
                 openModal(`수납장 추가에 실패했습니다: ${error.response.data.message || "알 수 없는 오류"}`);
             } else {
-                console.error("수납장 추가 중 오류 발생:", error.message);
                 openModal("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
             }
         }
@@ -138,7 +204,6 @@ const StorageAdd = () => {
                     setStorages(storages.map(s => s.storage_no === storage.storage_no ? { ...s, storage_name: updatedName, storage_row: updatedRows } : s));
                     closeEditModal();
                 } catch (error) {
-                    console.error("수납장 수정 중 오류 발생:", error);
                     openModal("수납장 수정에 실패했습니다. 다시 시도해주세요.");
                 }
             }
@@ -161,7 +226,6 @@ const StorageAdd = () => {
                 setStorages(storages.filter(storage => storage.storage_no !== storage_no));
                 closeConfirmModal();
             } catch (error) {
-                console.error("수납장 삭제 중 오류 발생:", error);
                 openModal("수납장 삭제에 실패했습니다. 다시 시도해주세요.");
             }
         });
@@ -196,6 +260,34 @@ const StorageAdd = () => {
 
     return (
         <Layout>
+            <div className="area-selection">
+                {!area_no && (
+                    <div className="area-selection-container">
+                        <h3>공간을 먼저 선택해주세요:</h3>
+                        <select onChange={handleAreaSelect} defaultValue="">
+                            <option value="">공간 선택</option>
+                            {areas.map((area) => (
+                                <option key={area.area_no} value={area.area_no}>
+                                    {area.area_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+                {area_no && !room_no && (
+                    <div className="room-selection">
+                        <h3>방을 선택해주세요:</h3>
+                        <select onChange={handleRoomSelect} defaultValue="">
+                            <option value="">방 선택</option>
+                            {rooms.map((room) => (
+                                <option key={room.room_no} value={room.room_no}>
+                                    {room.room_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+            </div>
             <div className="storage_input__container-wrapper">
                 <div className="storage_input__container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '15px' }}>
                     <div className="storage_shadow__input"></div>
@@ -313,7 +405,6 @@ const StorageAdd = () => {
                     <button onClick={closeEditModal}>취소</button>
                 </div>
             </Modal>
-
         </Layout>
     );
 };
