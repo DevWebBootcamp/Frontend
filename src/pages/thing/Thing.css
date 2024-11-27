@@ -27,8 +27,8 @@
 
 .title {
   float: left;
-  margin-left: 197px;
-  margin-top: 60px;
+  margin-left: 10%;
+  margin-top: 5%;
   font-size: 40px;
 }
 
@@ -78,9 +78,11 @@
 }
 
 .item-name-list {
-  list-style: none; /* 기본 목록 스타일 제거 */
-  padding: 0;
-  margin: 0; /* 리스트 자체는 기본 정렬 */
+  display: grid; /* CSS Grid 사용 */
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개씩 배치 */
+  padding-top: 30px;
+  padding-left: 18%;
+  max-width: 60%; /* 화면 크기에 따라 너비 제한 */
 }
 
 .item-name {
@@ -91,7 +93,7 @@
   margin: 10px auto; /* 요소 간 간격 및 중앙 정렬 */
   cursor: pointer; /* 클릭 가능한 포인터 표시 */
   transition: background-color 0.3s ease; /* 배경색 전환 효과 */
-  width: 300px; /* 개별 아이템의 고정 너비 */
+  width: 170px; /* 개별 아이템의 고정 너비 */
   max-width: 90%; /* 작은 화면에서는 너비 조정 */
   text-align: center; /* 텍스트 중앙 정렬 */
 }
@@ -113,6 +115,7 @@
   align-items: center; /* 세로 정렬 */
   justify-content: center; /* 가로 정렬 */
   z-index: 1000; /* 다른 요소보다 위에 배치 */
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -122,6 +125,7 @@
   max-width: 500px; /* 최대 너비 제한 */
   width: 90%; /* 화면 크기에 맞게 조정 */
   text-align: center; /* 텍스트 중앙 정렬 */
+  border: 1px solid black;
 }
 
 .close-button {
@@ -203,6 +207,7 @@
 
   .item-name-list {
     grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개씩 */
+    margin-left: -60px;
   }
 
   .button-container {
